@@ -1,15 +1,16 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Play, Plus, Settings, Save, Moon, Star, Gamepad } from 'lucide-react';
+import { Play, Plus, Settings, Save, Moon, Star, Gamepad, Code } from 'lucide-react';
 import GameEngine from './GameEngine';
+import VisualGameBuilder from './VisualGameBuilder';
 
 const GameBuilder = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<string>('');
   const [gameTitle, setGameTitle] = useState('My Awesome Game');
   const [playingGame, setPlayingGame] = useState<'platformer' | 'puzzle' | 'adventure' | null>(null);
+  const [buildingGame, setBuildingGame] = useState<'platformer' | 'puzzle' | 'adventure' | null>(null);
 
   const gameTemplates = [
     {
@@ -45,12 +46,24 @@ const GameBuilder = () => {
     setPlayingGame(gameType);
   };
 
+  const handleBuildGame = (gameType: 'platformer' | 'puzzle' | 'adventure') => {
+    setBuildingGame(gameType);
+  };
+
   const handleExitGame = () => {
     setPlayingGame(null);
   };
 
+  const handleExitBuilder = () => {
+    setBuildingGame(null);
+  };
+
   if (playingGame) {
     return <GameEngine gameType={playingGame} onExit={handleExitGame} />;
+  }
+
+  if (buildingGame) {
+    return <VisualGameBuilder gameType={buildingGame} onExit={handleExitBuilder} />;
   }
 
   return (
@@ -71,7 +84,7 @@ const GameBuilder = () => {
         <Tabs defaultValue="templates" className="w-full">
           <TabsList className="grid w-full grid-cols-3 rounded-full bg-white/50 backdrop-blur-md">
             <TabsTrigger value="templates" className="rounded-full">Choose Template</TabsTrigger>
-            <TabsTrigger value="builder" className="rounded-full">Build Game</TabsTrigger>
+            <TabsTrigger value="builder" className="rounded-full">Visual Builder</TabsTrigger>
             <TabsTrigger value="preview" className="rounded-full">Preview & Play</TabsTrigger>
           </TabsList>
 
@@ -114,10 +127,13 @@ const GameBuilder = () => {
                         <Button 
                           size="sm" 
                           className={`rounded-full bg-gradient-to-r ${template.color} text-white`}
-                          disabled={selectedTemplate !== template.id}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleBuildGame(template.id as 'platformer' | 'puzzle' | 'adventure');
+                          }}
                         >
-                          <Plus className="w-4 h-4 mr-1" />
-                          Use
+                          <Code className="w-4 h-4 mr-1" />
+                          Build
                         </Button>
                       </div>
                     </div>
@@ -128,71 +144,51 @@ const GameBuilder = () => {
             
             {selectedTemplate && (
               <div className="mt-8 text-center">
-                <Button 
-                  size="lg"
-                  className="cosmic-gradient text-white font-bold rounded-full px-8 py-4 text-lg pulse-glow hover:scale-105 transition-all duration-300"
-                >
-                  Start Building Game
-                </Button>
+                <div className="flex justify-center space-x-4">
+                  <Button 
+                    size="lg"
+                    className="cosmic-gradient text-white font-bold rounded-full px-8 py-4 text-lg pulse-glow hover:scale-105 transition-all duration-300"
+                    onClick={() => handleBuildGame(selectedTemplate as 'platformer' | 'puzzle' | 'adventure')}
+                  >
+                    <Code className="w-6 h-6 mr-2" />
+                    Start Visual Coding
+                  </Button>
+                  <Button 
+                    size="lg"
+                    variant="outline"
+                    className="font-bold rounded-full px-8 py-4 text-lg hover:scale-105 transition-all duration-300"
+                    onClick={() => handlePlayGame(selectedTemplate as 'platformer' | 'puzzle' | 'adventure')}
+                  >
+                    <Play className="w-6 h-6 mr-2" />
+                    Play Game
+                  </Button>
+                </div>
               </div>
             )}
           </TabsContent>
 
           <TabsContent value="builder" className="mt-8">
-            <div className="grid lg:grid-cols-4 gap-6">
-              {/* Game Elements Panel */}
-              <Card className="lg:col-span-1 rounded-3xl">
-                <CardHeader>
-                  <CardTitle className="text-lg font-bold text-galaxy-dark flex items-center">
-                    <Settings className="w-5 h-5 mr-2" />
-                    Game Elements
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {gameElements.map((element, idx) => {
-                    const IconComponent = element.icon;
-                    return (
-                      <div 
-                        key={idx}
-                        className="p-3 border-2 border-dashed border-cosmic-purple/30 rounded-xl hover:border-cosmic-purple hover:bg-cosmic-purple/5 cursor-grab transition-all duration-200"
-                      >
-                        <div className="flex items-center space-x-3">
-                          <IconComponent className="w-6 h-6 text-cosmic-purple" />
-                          <span className="text-sm font-medium text-galaxy-dark">{element.name}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </CardContent>
-              </Card>
-
-              {/* Game Canvas */}
-              <Card className="lg:col-span-3 rounded-3xl">
-                <CardHeader>
-                  <div className="flex justify-between items-center">
-                    <CardTitle className="text-lg font-bold text-galaxy-dark">{gameTitle}</CardTitle>
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" className="rounded-full">
-                        <Save className="w-4 h-4 mr-1" />
-                        Save
-                      </Button>
-                      <Button size="sm" className="cosmic-gradient text-white rounded-full">
-                        <Play className="w-4 h-4 mr-1" />
-                        Test
-                      </Button>
+            <div className="text-center space-y-6">
+              <div>
+                <h2 className="text-2xl font-bold text-galaxy-dark mb-4">Visual Game Builder</h2>
+                <p className="text-muted-foreground">Choose a game template to start building with drag-and-drop code blocks!</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                {gameTemplates.map((template) => (
+                  <Button
+                    key={template.id}
+                    size="lg"
+                    className={`h-auto p-6 rounded-3xl bg-gradient-to-br ${template.color} text-white hover:scale-105 transition-all duration-300`}
+                    onClick={() => handleBuildGame(template.id as 'platformer' | 'puzzle' | 'adventure')}
+                  >
+                    <div className="text-center">
+                      <Code className="w-8 h-8 mx-auto mb-2" />
+                      <div className="font-bold">{template.title}</div>
+                      <div className="text-sm opacity-90">Start Coding</div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="w-full h-96 bg-gradient-to-b from-starlight-blue/20 to-cosmic-purple/20 rounded-2xl border-2 border-dashed border-cosmic-purple/30 flex items-center justify-center">
-                    <div className="text-center space-y-4">
-                      <Moon className="w-16 h-16 text-cosmic-purple mx-auto" />
-                      <p className="text-lg font-medium text-galaxy-dark">Drag elements here to build your game!</p>
-                      <p className="text-muted-foreground">Start by selecting a template above</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </Button>
+                ))}
+              </div>
             </div>
           </TabsContent>
 
@@ -207,7 +203,7 @@ const GameBuilder = () => {
                   <div className="text-center space-y-4 text-white">
                     <Moon className="w-20 h-20 mx-auto" />
                     <h3 className="text-2xl font-bold">Your Game Will Appear Here!</h3>
-                    <p className="text-white/80">Build your game in the previous tab to see it come to life</p>
+                    <p className="text-white/80">Build your game in the Visual Builder tab to see it come to life</p>
                     <div className="flex justify-center space-x-4">
                       {gameTemplates.map((template) => (
                         <Button 

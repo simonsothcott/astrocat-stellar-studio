@@ -1,96 +1,97 @@
 
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Play, Star, Gamepad, Film, Moon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Moon, Sparkles } from 'lucide-react';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
-    <section className="min-h-screen pt-24 pb-16 px-4">
-      <div className="container mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 bg-nebula-pink/20 rounded-full px-4 py-2 text-sm font-medium text-cosmic-purple">
-                <Star className="w-4 h-4" />
-                <span>Welcome to the Galaxy of Code!</span>
-              </div>
-              
-              <h1 className="text-5xl lg:text-6xl font-bold text-galaxy-dark leading-tight">
-                Blast Off to
-                <span className="block nebula-gradient bg-clip-text text-transparent">
-                  Coding Adventures!
-                </span>
-              </h1>
-              
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                Join AstroCat on an amazing journey through space where you'll learn to code, 
-                create awesome games, make animated films, and explore a universe of creativity!
-              </p>
-            </div>
+    <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+      {/* Background with floating elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-starlight-blue via-background to-moon-glow opacity-80"></div>
+      
+      {/* Floating moons */}
+      <div className="absolute top-20 left-10 animate-float">
+        <Moon className="w-8 h-8 text-cosmic-purple opacity-60" />
+      </div>
+      <div className="absolute top-40 right-20 animate-float-delayed">
+        <Sparkles className="w-6 h-6 text-moon-glow opacity-70" />
+      </div>
+      <div className="absolute bottom-32 left-1/4 animate-float-slow">
+        <Moon className="w-10 h-10 text-starlight-blue opacity-50" />
+      </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                className="cosmic-gradient text-white font-bold rounded-full px-8 py-4 text-lg pulse-glow hover:scale-105 transition-all duration-300"
-              >
-                <Play className="w-6 h-6 mr-2" />
-                Start Your Adventure
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="rounded-full px-8 py-4 text-lg border-2 border-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300"
-              >
-                Watch Demo
-              </Button>
-            </div>
+      <div className="relative z-10 text-center max-w-6xl mx-auto">
+        {/* Welcome Video */}
+        <div className="mb-12 max-w-4xl mx-auto">
+          <div style={{padding:'56.67% 0 0 0', position:'relative'}}>
+            <iframe 
+              src="https://player.vimeo.com/video/1091408399?badge=0&autopause=0&player_id=0&app_id=58479" 
+              frameBorder="0" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
+              title="Astro Cat Academy Welcome"
+              className="rounded-3xl shadow-2xl"
+            />
+          </div>
+        </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cosmic-purple">1000+</div>
-                <div className="text-sm text-muted-foreground">Happy Cadets</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-nebula-pink">50+</div>
-                <div className="text-sm text-muted-foreground">Fun Activities</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-starlight-blue">∞</div>
-                <div className="text-sm text-muted-foreground">Possibilities</div>
+        {/* Hero Content */}
+        <div className="space-y-8">
+          <div className="flex items-center justify-center space-x-4 mb-6">
+            <div className="relative">
+              <Moon className="w-16 h-16 text-cosmic-purple animate-pulse" />
+              <div className="absolute -top-1 -right-1">
+                <Sparkles className="w-6 h-6 text-moon-glow animate-spin-slow" />
               </div>
             </div>
+            <h1 className="text-5xl lg:text-7xl font-bold">
+              <span className="text-galaxy-dark">AstroCat</span>
+              <span className="block nebula-gradient bg-clip-text text-transparent">Academy</span>
+            </h1>
+          </div>
+          
+          <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Join our friendly space cat on an amazing coding adventure! 
+            <span className="block mt-2 cosmic-gradient bg-clip-text text-transparent font-semibold">
+              Create games, make films, and explore the galaxy of programming!
+            </span>
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
+            <Button 
+              size="lg"
+              onClick={() => navigate('/game-builder')}
+              className="cosmic-gradient text-white font-bold rounded-full px-12 py-6 text-xl pulse-glow hover:scale-110 transition-all duration-300 shadow-2xl"
+            >
+              <Moon className="w-6 h-6 mr-3" />
+              Start Your Adventure!
+            </Button>
+            
+            <Button 
+              size="lg"
+              variant="outline"
+              className="rounded-full px-12 py-6 text-xl border-2 border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300"
+            >
+              <Sparkles className="w-6 h-6 mr-3" />
+              Watch Demos
+            </Button>
           </div>
 
-          {/* Right Content - Interactive Cards */}
-          <div className="space-y-6">
-            <div className="relative">
-              {/* Main AstroCat Character */}
-              <Card className="cosmic-gradient p-8 text-center rounded-3xl border-0 shadow-2xl floating">
-                <div className="flex justify-center mb-4">
-                  <Moon className="w-20 h-20 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Meet AstroCat!</h3>
-                <p className="text-white/90">Your coding companion on this galactic journey</p>
-              </Card>
-
-              {/* Floating Activity Cards */}
-              <Card className="absolute -right-4 -top-4 w-32 h-32 bg-white rounded-2xl shadow-lg border-2 border-nebula-pink floating-delayed flex flex-col items-center justify-center">
-                <Gamepad className="w-8 h-8 text-cosmic-purple mb-2" />
-                <span className="text-sm font-medium text-galaxy-dark">Games</span>
-              </Card>
-
-              <Card className="absolute -left-6 top-1/2 w-28 h-28 bg-white rounded-2xl shadow-lg border-2 border-starlight-blue floating flex flex-col items-center justify-center">
-                <Film className="w-7 h-7 text-nebula-pink mb-2" />
-                <span className="text-xs font-medium text-galaxy-dark">Films</span>
-              </Card>
-
-              <Card className="absolute -right-2 bottom-4 w-24 h-24 bg-white rounded-2xl shadow-lg border-2 border-moon-glow floating-delayed flex flex-col items-center justify-center">
-                <Moon className="w-6 h-6 text-moon-glow" />
-                <span className="text-xs font-medium text-galaxy-dark">Magic</span>
-              </Card>
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto pt-12">
+            <div className="text-center">
+              <div className="text-3xl font-bold cosmic-gradient bg-clip-text text-transparent">50+</div>
+              <div className="text-sm text-muted-foreground">Fun Projects</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold cosmic-gradient bg-clip-text text-transparent">1000+</div>
+              <div className="text-sm text-muted-foreground">Happy Kids</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold cosmic-gradient bg-clip-text text-transparent">∞</div>
+              <div className="text-sm text-muted-foreground">Possibilities</div>
             </div>
           </div>
         </div>
