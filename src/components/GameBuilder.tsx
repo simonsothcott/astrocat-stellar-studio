@@ -4,10 +4,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Play, Plus, Settings, Save, Moon, Star, Gamepad } from 'lucide-react';
+import GameEngine from './GameEngine';
 
 const GameBuilder = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<string>('');
   const [gameTitle, setGameTitle] = useState('My Awesome Game');
+  const [playingGame, setPlayingGame] = useState<'platformer' | 'puzzle' | 'adventure' | null>(null);
 
   const gameTemplates = [
     {
@@ -38,6 +40,18 @@ const GameBuilder = () => {
     { name: 'Collectible Stars', icon: Star, type: 'item' },
     { name: 'Platform', icon: Gamepad, type: 'obstacle' },
   ];
+
+  const handlePlayGame = (gameType: 'platformer' | 'puzzle' | 'adventure') => {
+    setPlayingGame(gameType);
+  };
+
+  const handleExitGame = () => {
+    setPlayingGame(null);
+  };
+
+  if (playingGame) {
+    return <GameEngine gameType={playingGame} onExit={handleExitGame} />;
+  }
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 bg-gradient-to-br from-background via-muted/30 to-background">
@@ -84,14 +98,28 @@ const GameBuilder = () => {
                       <span className="text-sm bg-moon-glow/20 text-cosmic-purple px-3 py-1 rounded-full font-medium">
                         {template.difficulty}
                       </span>
-                      <Button 
-                        size="sm" 
-                        className={`rounded-full bg-gradient-to-r ${template.color} text-white`}
-                        disabled={selectedTemplate !== template.id}
-                      >
-                        <Plus className="w-4 h-4 mr-1" />
-                        Use Template
-                      </Button>
+                      <div className="flex space-x-2">
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="rounded-full"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handlePlayGame(template.id as 'platformer' | 'puzzle' | 'adventure');
+                          }}
+                        >
+                          <Play className="w-4 h-4 mr-1" />
+                          Play
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          className={`rounded-full bg-gradient-to-r ${template.color} text-white`}
+                          disabled={selectedTemplate !== template.id}
+                        >
+                          <Plus className="w-4 h-4 mr-1" />
+                          Use
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -180,14 +208,20 @@ const GameBuilder = () => {
                     <Moon className="w-20 h-20 mx-auto" />
                     <h3 className="text-2xl font-bold">Your Game Will Appear Here!</h3>
                     <p className="text-white/80">Build your game in the previous tab to see it come to life</p>
-                    <Button 
-                      size="lg"
-                      variant="outline"
-                      className="rounded-full border-2 border-white text-white hover:bg-white hover:text-galaxy-dark"
-                    >
-                      <Play className="w-6 h-6 mr-2" />
-                      Play Game
-                    </Button>
+                    <div className="flex justify-center space-x-4">
+                      {gameTemplates.map((template) => (
+                        <Button 
+                          key={template.id}
+                          size="lg"
+                          variant="outline"
+                          className="rounded-full border-2 border-white text-white hover:bg-white hover:text-galaxy-dark"
+                          onClick={() => handlePlayGame(template.id as 'platformer' | 'puzzle' | 'adventure')}
+                        >
+                          <Play className="w-6 h-6 mr-2" />
+                          Play {template.title}
+                        </Button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </CardContent>
