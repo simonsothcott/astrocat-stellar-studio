@@ -1,6 +1,6 @@
 
 import { Button } from '@/components/ui/button';
-import { Star, Book, Gamepad, Film } from 'lucide-react';
+import { Star, Book, Gamepad, Film, Moon } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -10,8 +10,8 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-full cosmic-gradient flex items-center justify-center text-2xl">
-                🐱‍🚀
+              <div className="w-12 h-12 rounded-full cosmic-gradient flex items-center justify-center">
+                <Moon className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h3 className="text-2xl font-bold">AstroCat Academy</h3>
@@ -95,8 +95,12 @@ const Footer = () => {
         </div>
 
         {/* Floating Elements */}
-        <div className="absolute top-4 right-4 text-4xl opacity-20 floating">⭐</div>
-        <div className="absolute bottom-8 left-8 text-3xl opacity-20 floating-delayed">🌙</div>
+        <div className="absolute top-4 right-4 floating">
+          <Star className="w-8 h-8 text-white opacity-20" />
+        </div>
+        <div className="absolute bottom-8 left-8 floating-delayed">
+          <Moon className="w-6 h-6 text-white opacity-20" />
+        </div>
       </div>
     </footer>
   );

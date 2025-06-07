@@ -1,7 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Play, Star, Gamepad, Film } from 'lucide-react';
+import { Play, Star, Gamepad, Film, Moon } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -69,7 +69,9 @@ const Hero = () => {
             <div className="relative">
               {/* Main AstroCat Character */}
               <Card className="cosmic-gradient p-8 text-center rounded-3xl border-0 shadow-2xl floating">
-                <div className="text-8xl mb-4">🐱‍🚀</div>
+                <div className="flex justify-center mb-4">
+                  <Moon className="w-20 h-20 text-white" />
+                </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Meet AstroCat!</h3>
                 <p className="text-white/90">Your coding companion on this galactic journey</p>
               </Card>
@@ -86,7 +88,7 @@ const Hero = () => {
               </Card>
 
               <Card className="absolute -right-2 bottom-4 w-24 h-24 bg-white rounded-2xl shadow-lg border-2 border-moon-glow floating-delayed flex flex-col items-center justify-center">
-                <div className="text-2xl mb-1">✨</div>
+                <Moon className="w-6 h-6 text-moon-glow" />
                 <span className="text-xs font-medium text-galaxy-dark">Magic</span>
               </Card>
             </div>

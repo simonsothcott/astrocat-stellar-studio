@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Gamepad, Film, Star, Image, Book } from 'lucide-react';
+import { Gamepad, Film, Star, Image, Book, Moon } from 'lucide-react';
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -19,8 +19,8 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-full cosmic-gradient flex items-center justify-center text-2xl floating">
-              🐱‍🚀
+            <div className="w-12 h-12 rounded-full cosmic-gradient flex items-center justify-center floating">
+              <Moon className="w-6 h-6 text-white" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-galaxy-dark">AstroCat Academy</h1>

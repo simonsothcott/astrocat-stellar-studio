@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Gamepad, Film, Book, Star, Play, Code } from 'lucide-react';
+import { Gamepad, Film, Book, Star, Play, Code, Moon } from 'lucide-react';
 
 const ActivitySection = () => {
   const activities = [
@@ -13,7 +13,7 @@ const ActivitySection = () => {
       color: 'cosmic-purple',
       gradient: 'from-purple-400 to-purple-600',
       features: ['Drag & Drop Game Builder', 'Character Creator', 'Physics Playground'],
-      emoji: '🎮'
+      emoji: <Gamepad className="w-8 h-8 text-white" />
     },
     {
       id: 'films',
@@ -23,7 +23,7 @@ const ActivitySection = () => {
       color: 'nebula-pink',
       gradient: 'from-pink-400 to-rose-500',
       features: ['Scene Builder', 'Character Animation', 'Voice Recording'],
-      emoji: '🎬'
+      emoji: <Film className="w-8 h-8 text-white" />
     },
     {
       id: 'activities',
@@ -33,7 +33,7 @@ const ActivitySection = () => {
       color: 'starlight-blue',
       gradient: 'from-blue-400 to-indigo-500',
       features: ['Visual Programming', 'Code Challenges', 'Logic Puzzles'],
-      emoji: '📚'
+      emoji: <Book className="w-8 h-8 text-white" />
     }
   ];
 
@@ -75,7 +75,7 @@ const ActivitySection = () => {
                 
                 <CardHeader className="text-center pt-8">
                   <div className="flex justify-center mb-4">
-                    <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${activity.gradient} flex items-center justify-center text-4xl text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${activity.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       {activity.emoji}
                     </div>
                   </div>
@@ -143,8 +143,12 @@ const ActivitySection = () => {
             </div>
             
             <div className="p-8 lg:p-12 text-center">
-              <div className="text-8xl mb-4 floating">🚀</div>
-              <div className="text-6xl opacity-50 floating-delayed">⭐</div>
+              <div className="flex justify-center mb-4 floating">
+                <Moon className="w-20 h-20 text-white" />
+              </div>
+              <div className="flex justify-center floating-delayed">
+                <Star className="w-12 h-12 text-white opacity-50" />
+              </div>
             </div>
           </div>
         </Card>
