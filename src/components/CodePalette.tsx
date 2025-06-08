@@ -9,30 +9,50 @@ const CodePalette = () => {
     {
       title: 'Events',
       blocks: [
-        { type: 'event', label: 'When Game Starts', color: 'bg-yellow-500', icon: <Play className="w-4 h-4" /> },
-        { type: 'event', label: 'When Key Pressed', color: 'bg-yellow-500', icon: <Zap className="w-4 h-4" /> },
-        { type: 'event', label: 'When Clicked', color: 'bg-yellow-500', icon: <MousePointer className="w-4 h-4" /> }
+        { type: 'event', label: 'When Game Starts', color: 'bg-yellow-500', iconName: 'Play' },
+        { type: 'event', label: 'When Key Pressed', color: 'bg-yellow-500', iconName: 'Zap' },
+        { type: 'event', label: 'When Clicked', color: 'bg-yellow-500', iconName: 'MousePointer' }
       ]
     },
     {
       title: 'Actions',
       blocks: [
-        { type: 'action', label: 'Move Right', color: 'bg-blue-500', icon: <ArrowRight className="w-4 h-4" /> },
-        { type: 'action', label: 'Jump', color: 'bg-blue-500', icon: <Move className="w-4 h-4" /> },
-        { type: 'action', label: 'Collect Star', color: 'bg-blue-500', icon: <Star className="w-4 h-4" /> }
+        { type: 'action', label: 'Move Right', color: 'bg-blue-500', iconName: 'ArrowRight' },
+        { type: 'action', label: 'Jump', color: 'bg-blue-500', iconName: 'Move' },
+        { type: 'action', label: 'Collect Star', color: 'bg-blue-500', iconName: 'Star' }
       ]
     },
     {
       title: 'Control',
       blocks: [
-        { type: 'control', label: 'Repeat 10 times', color: 'bg-orange-500', icon: <RotateCcw className="w-4 h-4" /> },
-        { type: 'control', label: 'If touching...', color: 'bg-orange-500', icon: <Zap className="w-4 h-4" /> }
+        { type: 'control', label: 'Repeat 10 times', color: 'bg-orange-500', iconName: 'RotateCcw' },
+        { type: 'control', label: 'If touching...', color: 'bg-orange-500', iconName: 'Zap' }
       ]
     }
   ];
 
+  const getIcon = (iconName: string) => {
+    const icons = {
+      Play: <Play className="w-4 h-4" />,
+      Zap: <Zap className="w-4 h-4" />,
+      MousePointer: <MousePointer className="w-4 h-4" />,
+      ArrowRight: <ArrowRight className="w-4 h-4" />,
+      Move: <Move className="w-4 h-4" />,
+      Star: <Star className="w-4 h-4" />,
+      RotateCcw: <RotateCcw className="w-4 h-4" />
+    };
+    return icons[iconName as keyof typeof icons] || <Star className="w-4 h-4" />;
+  };
+
   const handleDragStart = (e: React.DragEvent, block: any) => {
-    e.dataTransfer.setData('application/json', JSON.stringify(block));
+    // Only serialize the data we need, not the React components
+    const blockData = {
+      type: block.type,
+      label: block.label,
+      color: block.color,
+      iconName: block.iconName
+    };
+    e.dataTransfer.setData('application/json', JSON.stringify(blockData));
   };
 
   return (
@@ -51,7 +71,7 @@ const CodePalette = () => {
                   type={block.type as any}
                   label={block.label}
                   color={block.color}
-                  icon={block.icon}
+                  icon={getIcon(block.iconName)}
                   onDragStart={(e) => handleDragStart(e, block)}
                 />
               ))}

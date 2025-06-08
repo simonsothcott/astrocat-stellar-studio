@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -42,7 +41,7 @@ const Films = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <div className="pt-24 pb-16 px-4 bg-gradient-to-br from-background via-muted/30 to-background">
+      <div className="pt-32 pb-16 px-4 bg-gradient-to-br from-background via-muted/30 to-background">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-galaxy-dark mb-4">

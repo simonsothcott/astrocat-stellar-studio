@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Play, Save, Trash2 } from 'lucide-react';
+import { Play, Save, Trash2, ArrowRight, Star, Move, MousePointer, Zap, RotateCcw } from 'lucide-react';
 import CodeBlock from './CodeBlock';
 
 interface DroppedBlock {
@@ -10,7 +10,7 @@ interface DroppedBlock {
   type: string;
   label: string;
   color: string;
-  icon?: React.ReactNode;
+  iconName: string;
 }
 
 interface CodeCanvasProps {
@@ -20,14 +20,31 @@ interface CodeCanvasProps {
 const CodeCanvas = ({ onPlayCode }: CodeCanvasProps) => {
   const [droppedBlocks, setDroppedBlocks] = useState<DroppedBlock[]>([]);
 
+  const getIcon = (iconName: string) => {
+    const icons = {
+      Play: <Play className="w-4 h-4" />,
+      Zap: <Zap className="w-4 h-4" />,
+      MousePointer: <MousePointer className="w-4 h-4" />,
+      ArrowRight: <ArrowRight className="w-4 h-4" />,
+      Move: <Move className="w-4 h-4" />,
+      Star: <Star className="w-4 h-4" />,
+      RotateCcw: <RotateCcw className="w-4 h-4" />
+    };
+    return icons[iconName as keyof typeof icons] || <Star className="w-4 h-4" />;
+  };
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    const blockData = JSON.parse(e.dataTransfer.getData('application/json'));
-    const newBlock: DroppedBlock = {
-      id: Date.now().toString(),
-      ...blockData
-    };
-    setDroppedBlocks(prev => [...prev, newBlock]);
+    try {
+      const blockData = JSON.parse(e.dataTransfer.getData('application/json'));
+      const newBlock: DroppedBlock = {
+        id: Date.now().toString(),
+        ...blockData
+      };
+      setDroppedBlocks(prev => [...prev, newBlock]);
+    } catch (error) {
+      console.error('Error parsing dropped data:', error);
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -83,7 +100,7 @@ const CodeCanvas = ({ onPlayCode }: CodeCanvasProps) => {
                   type={block.type as any}
                   label={block.label}
                   color={block.color}
-                  icon={block.icon}
+                  icon={getIcon(block.iconName)}
                   draggable={false}
                 />
               </div>

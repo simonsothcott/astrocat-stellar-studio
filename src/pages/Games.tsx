@@ -23,21 +23,21 @@ const Games = () => {
     },
     {
       id: 'puzzle',
-      title: 'Moon Puzzle',
-      description: 'Solve puzzles to help AstroCat find the way home',
+      title: 'Star Collector',
+      description: 'Simple game to collect glowing stars in space',
       difficulty: 'Easy',
       color: 'from-blue-400 to-indigo-500',
       icon: Star,
-      features: ['Logic puzzles', 'Pattern matching', 'Strategic thinking']
+      features: ['Point and click', 'Bright animations', 'Simple controls']
     },
     {
       id: 'adventure',
-      title: 'Galaxy Adventure',
-      description: 'Explore different planets and meet alien friends',
-      difficulty: 'Intermediate',
+      title: 'Space Walker',
+      description: 'Walk around and explore a friendly space station',
+      difficulty: 'Easy',
       color: 'from-pink-400 to-rose-500',
       icon: Gamepad,
-      features: ['Planet exploration', 'Character interaction', 'Story elements']
+      features: ['Easy movement', 'Colorful graphics', 'Safe exploration']
     }
   ];
 
@@ -56,7 +56,7 @@ const Games = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <div className="pt-24 pb-16 px-4 bg-gradient-to-br from-background via-muted/30 to-background">
+      <div className="pt-32 pb-16 px-4 bg-gradient-to-br from-background via-muted/30 to-background">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-galaxy-dark mb-4">

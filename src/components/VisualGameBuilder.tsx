@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -28,8 +27,8 @@ const VisualGameBuilder = ({ gameType, onExit }: VisualGameBuilderProps) => {
   const getGameTitle = () => {
     switch(gameType) {
       case 'platformer': return 'Build Space Platformer';
-      case 'puzzle': return 'Build Moon Puzzle';
-      case 'adventure': return 'Build Galaxy Adventure';
+      case 'puzzle': return 'Build Star Collector';
+      case 'adventure': return 'Build Space Walker';
       default: return 'Build Game';
     }
   };
@@ -39,7 +38,7 @@ const VisualGameBuilder = ({ gameType, onExit }: VisualGameBuilderProps) => {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-16 px-4 bg-gradient-to-br from-background via-muted/30 to-background">
+    <div className="min-h-screen pt-32 pb-16 px-4 bg-gradient-to-br from-background via-muted/30 to-background">
       <div className="container mx-auto">
         <div className="mb-8">
           <div className="flex items-center justify-between">
