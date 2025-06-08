@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -73,9 +72,6 @@ const Gallery = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-galaxy-dark mb-4">
               Student Gallery
-              <span className="inline-block nebula-gradient bg-clip-text text-transparent ml-2">
-                Showcase & Share!
-              </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Discover amazing creations from students around the galaxy. Share your own masterpieces!

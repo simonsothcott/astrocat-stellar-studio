@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -65,9 +64,6 @@ const Activities = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-galaxy-dark mb-4">
               Learning Activities
-              <span className="block nebula-gradient bg-clip-text text-transparent">
-                Explore & Create!
-              </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Engage with hands-on activities that combine fun with learning across science, math, and technology.

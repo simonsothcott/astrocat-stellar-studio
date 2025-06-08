@@ -1,4 +1,3 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import GameEngine from '@/components/GameEngine';
@@ -61,9 +60,6 @@ const Games = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-galaxy-dark mb-4">
               Space Games
-              <span className="block nebula-gradient bg-clip-text text-transparent">
-                Play & Learn!
-              </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Explore our collection of educational space games designed to make learning fun and engaging.

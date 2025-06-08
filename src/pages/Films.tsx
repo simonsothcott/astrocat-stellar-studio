@@ -46,9 +46,6 @@ const Films = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold text-galaxy-dark mb-4">
               Educational Films
-              <span className="block nebula-gradient bg-clip-text text-transparent">
-                Watch & Discover!
-              </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Explore our collection of educational videos that make learning about space, coding, and science exciting.
