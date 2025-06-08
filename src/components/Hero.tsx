@@ -1,101 +1,135 @@
-
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
-import { Moon, Sparkles } from 'lucide-react';
+import { Sparkles, Play, Code, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
-  const navigate = useNavigate();
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-      {/* Background with floating elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-starlight-blue via-background to-moon-glow opacity-80"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/30 to-background" />
       
-      {/* Floating moons */}
-      <div className="absolute top-20 left-10 animate-float">
-        <Moon className="w-8 h-8 text-cosmic-purple opacity-60" />
-      </div>
-      <div className="absolute top-40 right-20 animate-float-delayed">
-        <Sparkles className="w-6 h-6 text-moon-glow opacity-70" />
-      </div>
-      <div className="absolute bottom-32 left-1/4 animate-float-slow">
-        <Moon className="w-10 h-10 text-starlight-blue opacity-50" />
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="floating absolute top-20 left-10 w-20 h-20 rounded-full cosmic-gradient opacity-20" />
+        <div className="floating absolute top-40 right-20 w-16 h-16 rounded-full nebula-gradient opacity-30" style={{ animationDelay: '1s' }} />
+        <div className="floating absolute bottom-40 left-20 w-12 h-12 rounded-full starlight-gradient opacity-25" style={{ animationDelay: '2s' }} />
+        <div className="floating absolute bottom-20 right-40 w-24 h-24 rounded-full moon-gradient opacity-20" style={{ animationDelay: '0.5s' }} />
       </div>
 
-      <div className="relative z-10 text-center max-w-6xl mx-auto">
-        {/* Welcome Video */}
-        <div className="mb-12 max-w-4xl mx-auto">
-          <div style={{padding:'56.67% 0 0 0', position:'relative'}}>
-            <iframe 
-              src="https://player.vimeo.com/video/1091408399?badge=0&autopause=0&player_id=0&app_id=58479" 
-              frameBorder="0" 
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-              style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
-              title="Astro Cat Academy Welcome"
-              className="rounded-3xl shadow-2xl"
-            />
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center space-y-8 max-w-4xl mx-auto">
+          {/* Main Heading */}
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-7xl font-bold text-galaxy-dark">
+              Welcome to{' '}
+              <span className="cosmic-gradient bg-clip-text text-transparent">
+                AstroCat Academy
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+              Where young minds explore the universe through coding, games, and interactive learning adventures!
+            </p>
           </div>
-        </div>
 
-        {/* Hero Content */}
-        <div className="space-y-8">
-          <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="relative">
-              <Moon className="w-16 h-16 text-cosmic-purple animate-pulse" />
-              <div className="absolute -top-1 -right-1">
-                <Sparkles className="w-6 h-6 text-moon-glow animate-spin-slow" />
+          {/* Video Section */}
+          <div className="my-12">
+            <div className="max-w-4xl mx-auto">
+              <div style={{padding:"56.67% 0 0 0", position:"relative"}}>
+                <iframe 
+                  src="https://player.vimeo.com/video/1091408399?badge=0&autopause=0&player_id=0&app_id=58479" 
+                  frameBorder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                  style={{position:"absolute", top:0, left:0, width:"100%", height:"100%"}} 
+                  title="Astro Cat Academy Welcome"
+                  className="rounded-3xl shadow-2xl"
+                />
               </div>
             </div>
-            <h1 className="text-5xl lg:text-7xl font-bold">
-              <span className="text-galaxy-dark">AstroCat</span>
-              <span className="block nebula-gradient bg-clip-text text-transparent">Academy</span>
-            </h1>
           </div>
-          
-          <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Join our friendly space cat on an amazing coding adventure! 
-            <span className="block mt-2 cosmic-gradient bg-clip-text text-transparent font-semibold">
-              Create games, make films, and explore the galaxy of programming!
-            </span>
-          </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-            <Button 
-              size="lg"
-              onClick={() => navigate('/game-builder')}
-              className="cosmic-gradient text-white font-bold rounded-full px-12 py-6 text-xl pulse-glow hover:scale-110 transition-all duration-300 shadow-2xl"
-            >
-              <Moon className="w-6 h-6 mr-3" />
-              Start Your Adventure!
-            </Button>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/games">
+              <Button 
+                size="lg" 
+                className="cosmic-gradient text-white font-bold rounded-full px-8 py-4 text-lg pulse-glow hover:scale-105 transition-all duration-300"
+              >
+                <Play className="mr-2 h-6 w-6" />
+                Start Playing
+              </Button>
+            </Link>
             
-            <Button 
-              size="lg"
-              variant="outline"
-              className="rounded-full px-12 py-6 text-xl border-2 border-cosmic-purple text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300"
-            >
-              <Sparkles className="w-6 h-6 mr-3" />
-              Watch Demos
-            </Button>
+            <Link to="/game-builder">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="font-bold rounded-full px-8 py-4 text-lg hover:scale-105 transition-all duration-300 border-2"
+              >
+                <Code className="mr-2 h-6 w-6" />
+                Create Games
+              </Button>
+            </Link>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto pt-12">
-            <div className="text-center">
-              <div className="text-3xl font-bold cosmic-gradient bg-clip-text text-transparent">50+</div>
-              <div className="text-sm text-muted-foreground">Fun Projects</div>
+          {/* Feature Highlights */}
+          <div className="grid md:grid-cols-3 gap-6 mt-16">
+            <div className="text-center space-y-3">
+              <div className="w-16 h-16 mx-auto rounded-full cosmic-gradient flex items-center justify-center">
+                <Play className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-galaxy-dark">Interactive Games</h3>
+              <p className="text-muted-foreground">Play engaging space-themed games that teach coding and problem-solving</p>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold cosmic-gradient bg-clip-text text-transparent">1000+</div>
-              <div className="text-sm text-muted-foreground">Happy Kids</div>
+            
+            <div className="text-center space-y-3">
+              <div className="w-16 h-16 mx-auto rounded-full nebula-gradient flex items-center justify-center">
+                <Code className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-galaxy-dark">Visual Coding</h3>
+              <p className="text-muted-foreground">Learn programming with drag-and-drop blocks, just like Scratch</p>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold cosmic-gradient bg-clip-text text-transparent">∞</div>
-              <div className="text-sm text-muted-foreground">Possibilities</div>
+            
+            <div className="text-center space-y-3">
+              <div className="w-16 h-16 mx-auto rounded-full starlight-gradient flex items-center justify-center">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-galaxy-dark">Creative Learning</h3>
+              <p className="text-muted-foreground">Express creativity while discovering science, math, and technology</p>
+            </div>
+          </div>
+
+          {/* Explore More Section */}
+          <div className="mt-16 p-8 rounded-3xl bg-gradient-to-r from-cosmic-purple/10 to-starlight-blue/10 border border-cosmic-purple/20">
+            <h2 className="text-2xl font-bold text-galaxy-dark mb-4">Ready to Explore the Galaxy?</h2>
+            <p className="text-muted-foreground mb-6">
+              Discover educational films, hands-on activities, and a gallery of amazing student creations!
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Link to="/films">
+                <Button variant="outline" className="rounded-full">
+                  Watch Films <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/activities">
+                <Button variant="outline" className="rounded-full">
+                  Try Activities <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/gallery">
+                <Button variant="outline" className="rounded-full">
+                  View Gallery <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
