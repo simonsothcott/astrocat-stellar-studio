@@ -13,11 +13,11 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/30 to-background" />
       
       {/* Animated background elements - Lower z-index */}
-      <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
+      <div className="absolute inset-0 overflow-hidden decorative-element">
         <div className="floating absolute top-20 left-10 w-20 h-20 rounded-full cosmic-gradient opacity-20" />
-        <div className="floating absolute top-40 right-20 w-16 h-16 rounded-full nebula-gradient opacity-30" style={{ animationDelay: '1s' }} />
+        <div className="floating-delayed absolute top-40 right-20 w-16 h-16 rounded-full nebula-gradient opacity-30" />
         <div className="floating absolute bottom-40 left-20 w-12 h-12 rounded-full starlight-gradient opacity-25" style={{ animationDelay: '2s' }} />
-        <div className="floating absolute bottom-20 right-40 w-24 h-24 rounded-full moon-gradient opacity-20" style={{ animationDelay: '0.5s' }} />
+        <div className="floating-delayed absolute bottom-20 right-40 w-24 h-24 rounded-full moon-gradient opacity-20" />
       </div>
 
       {/* Skip link for accessibility */}
@@ -28,13 +28,13 @@ const Hero = () => {
         Skip to content
       </a>
 
-      <div className="container mx-auto px-4 relative z-10" style={{ paddingTop: 'clamp(100px, 12vh, 160px)' }}>
+      <div className="container mx-auto px-4 content-layer hero-text">
         <div id="main-content" className="text-center space-y-8 max-w-4xl mx-auto">
           {/* Main Heading */}
-          <header className="space-y-4 relative z-10">
+          <header className="space-y-4 content-layer">
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-galaxy-dark leading-tight">
               Welcome to{' '}
-              <span className="cosmic-gradient bg-clip-text text-transparent">
+              <span className="inline-block cosmic-gradient bg-clip-text text-transparent">
                 AstroCat Academy
               </span>
             </h1>
@@ -44,7 +44,7 @@ const Hero = () => {
           </header>
 
           {/* Video Section */}
-          <section className="my-8 sm:my-12 relative z-10">
+          <section className="my-8 sm:my-12 content-layer">
             <div className="max-w-4xl mx-auto">
               <div style={{padding:"56.67% 0 0 0", position:"relative"}}>
                 <iframe 
@@ -60,7 +60,7 @@ const Hero = () => {
           </section>
 
           {/* Action Buttons */}
-          <section className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
+          <section className="flex flex-col sm:flex-row gap-4 justify-center items-center content-layer">
             <Link to="/games">
               <Button 
                 size="lg" 
@@ -86,7 +86,7 @@ const Hero = () => {
           </section>
 
           {/* Feature Highlights */}
-          <section className="grid md:grid-cols-3 gap-6 mt-12 sm:mt-16 relative z-10">
+          <section className="grid md:grid-cols-3 gap-6 mt-12 sm:mt-16 content-layer">
             <div className="text-center space-y-3">
               <div className="w-16 h-16 mx-auto rounded-full cosmic-gradient flex items-center justify-center">
                 <Play className="w-8 h-8 text-white" aria-hidden="true" />
@@ -113,7 +113,7 @@ const Hero = () => {
           </section>
 
           {/* Explore More Section */}
-          <section className="mt-12 sm:mt-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-cosmic-purple/10 to-starlight-blue/10 border border-cosmic-purple/20 relative z-10">
+          <section className="mt-12 sm:mt-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-cosmic-purple/10 to-starlight-blue/10 border border-cosmic-purple/20 content-layer">
             <h2 className="text-2xl font-bold text-galaxy-dark mb-4">Ready to Explore the Galaxy?</h2>
             <p className="text-muted-foreground mb-6">
               Discover educational films, hands-on activities, and a gallery of amazing student creations!
@@ -152,7 +152,7 @@ const Hero = () => {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" style={{ zIndex: 1 }} />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent decorative-element" />
     </main>
   );
 };
