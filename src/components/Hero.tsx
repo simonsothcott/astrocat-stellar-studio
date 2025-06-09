@@ -34,7 +34,7 @@ const Hero = () => {
           <header className="space-y-4 content-layer">
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-galaxy-dark leading-tight">
               Welcome to{' '}
-              <span className="inline-block cosmic-gradient bg-clip-text text-transparent">
+              <span className="cosmic-gradient bg-clip-text text-transparent">
                 AstroCat Academy
               </span>
             </h1>
