@@ -33,10 +33,7 @@ const Hero = () => {
           {/* Main Heading */}
           <header className="space-y-4 content-layer">
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-galaxy-dark leading-tight">
-              Welcome to{' '}
-              <span className="cosmic-gradient bg-clip-text text-transparent">
-                AstroCat Academy
-              </span>
+              Welcome to AstroCat Academy
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
               Where young minds explore the universe through coding, games, and interactive learning adventures!

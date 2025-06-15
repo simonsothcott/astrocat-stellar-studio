@@ -188,13 +188,31 @@
     animation-delay: 1s;
   }
 
-  /* Decorative elements behind content */
+  /* Decorative elements behind content - Fixed z-index */
   .decorative-element {
     z-index: 0;
     position: absolute;
+    pointer-events: none; /* Prevent interaction issues */
   }
 
   .content-layer {
+    position: relative;
+    z-index: 10; /* Increased z-index for better layering */
+  }
+
+  /* Ensure text elements have proper contrast and readability */
+  .text-galaxy-dark {
+    color: hsl(var(--galaxy-dark));
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Fix any potential gradient text issues */
+  .bg-clip-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline;
     position: relative;
     z-index: 1;
   }
@@ -230,4 +248,9 @@
 /* Ensure proper contrast for all interactive elements */
 button, a, [role="button"] {
   min-height: 44px; /* WCAG minimum touch target size */
+}
+
+/* Fix navigation z-index to ensure it stays on top */
+nav {
+  z-index: 50;
 }
